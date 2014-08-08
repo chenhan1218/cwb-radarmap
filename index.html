@@ -53,11 +53,16 @@
 
 		map.locate({setView: true, maxZoom: 9});
 
-		var imageUrl = 'http://opendata.cwb.gov.tw/opendata/DIV4/O-A0011-001.jpg';
-		var imageBounds = [[19.66, 117.3], [27.16, 124.8]];
+		var imageUrl;
+		var imageBounds;
+		imageUrl = 'http://opendata.cwb.gov.tw/opendata/DIV4/O-A0011-001.jpg';
+		imageBounds = [[19.66, 117.3], [27.16, 124.8]];
 		L.imageOverlay(imageUrl, imageBounds).addTo(map);
-		var imageUrl = 'http://opendata.cwb.gov.tw/opendata/DIV4/O-A0011-002.jpg';
-		var imageBounds = [[23.475, 119.99], [25.47, 122.01]];
+		imageUrl = 'http://opendata.cwb.gov.tw/opendata/DIV4/O-A0011-002.jpg';
+		imageBounds = [[23.475, 119.99], [25.47, 122.01]];
+		L.imageOverlay(imageUrl, imageBounds).addTo(map);
+		imageUrl = 'http://opendata.cwb.gov.tw/opendata/DIV4/O-A0011-003.jpg';
+		imageBounds = [[21.86, 119.99], [23.88, 122.01]];
 		L.imageOverlay(imageUrl, imageBounds).addTo(map);
 		// L.marker([22, 120]).addTo(map);
 		// L.marker([24, 120]).addTo(map);
