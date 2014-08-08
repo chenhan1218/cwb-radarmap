@@ -24,7 +24,7 @@
 	<div id="map"></div>
 
 	<script>
-		var map = L.map('map');
+		var map = L.map('map').setView([23.5, 121.5], 8);
 
 		L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
 			maxZoom: 13,
@@ -48,9 +48,14 @@
 		}
 
 		map.on('locationfound', onLocationFound);
-		map.on('locationerror', onLocationError);
+		//map.on('locationerror', onLocationError);
 
 		map.locate({setView: true, maxZoom: 9});
+
+		// L.marker([22, 120]).addTo(map);
+		// L.marker([24, 120]).addTo(map);
+		// L.marker([22, 122]).addTo(map);
+		// L.marker([24, 122]).addTo(map);
 	</script>
 </body>
 </html>
