@@ -6,9 +6,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta charset="UTF-8">
 
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	<script src='easy-button.js'></script>
 
 	<style>
 		body {
@@ -64,6 +66,12 @@
 		imageUrl = 'http://opendata.cwb.gov.tw/opendata/DIV4/O-A0011-003.jpg';
 		imageBounds = [[21.86, 119.99], [23.88, 122.01]];
 		L.imageOverlay(imageUrl, imageBounds).addTo(map);
+		L.easyButton('fa-compass',
+			function (){
+				map.locate({setView: true});
+			},
+			'Interact with the map'
+		)
 		// L.marker([22, 120]).addTo(map);
 		// L.marker([24, 120]).addTo(map);
 		// L.marker([22, 122]).addTo(map);
