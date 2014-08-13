@@ -38,6 +38,9 @@
 		var taiwanImage = L.imageOverlay(taiwanImageUrl, taiwanImageBounds).addTo(map);
 		var northTaiwanImage = L.imageOverlay(northTaiwanImageUrl, northTaiwanImageBounds).addTo(map);
 		var southTaiwanImage = L.imageOverlay(southTaiwanImageUrl, southTaiwanImageBounds).addTo(map);
+		var marker;
+		var circle;
+
 		function refreshImage() {
 			map.removeLayer(taiwanImage);
 			taiwanImage = L.imageOverlay(taiwanImageUrl, taiwanImageBounds).addTo(map);
@@ -58,10 +61,18 @@
 		function onLocationFound(e) {
 			var radius = e.accuracy / 2;
 
-			L.marker(e.latlng).addTo(map)
+			if (marker) {
+				map.removeLayer(marker);
+			}
+			if (circle) {
+				map.removeLayer(circle);
+			}
+			marker = L.marker(e.latlng);
+			map.addLayer(marker);
 			// 	.bindPopup("You are within " + radius + " meters from this point").openPopup();
 
-			L.circle(e.latlng, radius).addTo(map);
+			circle = L.circle(e.latlng, radius);
+			map.addLayer(circle);
 		}
 
 		function onLocationError(e) {
