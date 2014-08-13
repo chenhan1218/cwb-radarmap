@@ -53,7 +53,7 @@
 		L.control.scale({position: 'topright'}).addTo(map);
 		L.easyButton('fa-compass',
 			function (){
-				map.locate({setView: true});
+				map.locate({setView: false});
 			},
 			'Interact with the map'
 		);
@@ -67,6 +67,7 @@
 			if (circle) {
 				map.removeLayer(circle);
 			}
+			map.setView(e.latlng);
 			marker = L.marker(e.latlng);
 			map.addLayer(marker);
 			// 	.bindPopup("You are within " + radius + " meters from this point").openPopup();
@@ -81,7 +82,7 @@
 
 		map.on('locationfound', onLocationFound);
 		//map.on('locationerror', onLocationError);
-		map.locate({setView: true, maxZoom: 9});
+		map.locate({setView: false});
 
 		L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
 			maxZoom: 11,
