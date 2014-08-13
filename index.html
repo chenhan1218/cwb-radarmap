@@ -26,16 +26,34 @@
 	<div id="map"></div>
 
 	<script>
-		var map = L.map('map').setView([23.5, 121.5], 8);
-		L.control.scale({position: 'topright'}).addTo(map);
+		var taiwanImageUrl = 'http://opendata.cwb.gov.tw/opendata/DIV4/O-A0011-001.jpg';
+		var taiwanImageBounds = [[19.66, 117.3], [27.16, 124.8]];
+		var northTaiwanImageUrl = 'http://opendata.cwb.gov.tw/opendata/DIV4/O-A0011-002.jpg';
+		var northTaiwanImageBounds = [[23.475, 119.99], [25.47, 122.01]];
+		var southTaiwanImageUrl = 'http://opendata.cwb.gov.tw/opendata/DIV4/O-A0011-003.jpg';
+		var southTaiwanImageBounds = [[21.86, 119.99], [23.88, 122.01]];
 
-		L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-			maxZoom: 13,
-			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-			id: 'examples.map-i86knfo3'
-		}).addTo(map);
+		var map = L.map('map').setView([23.5, 121.5], 8);
+
+		var taiwanImage = L.imageOverlay(taiwanImageUrl, taiwanImageBounds).addTo(map);
+		var northTaiwanImage = L.imageOverlay(northTaiwanImageUrl, northTaiwanImageBounds).addTo(map);
+		var southTaiwanImage = L.imageOverlay(southTaiwanImageUrl, southTaiwanImageBounds).addTo(map);
+		function refreshImage() {
+			map.removeLayer(taiwanImage);
+			taiwanImage = L.imageOverlay(taiwanImageUrl, taiwanImageBounds).addTo(map);
+			map.removeLayer(northTaiwanImage);
+			northTaiwanImage = L.imageOverlay(northTaiwanImageUrl, northTaiwanImageBounds).addTo(map);
+			map.removeLayer(southTaiwanImage);
+			southTaiwanImage = L.imageOverlay(southTaiwanImageUrl, southTaiwanImageBounds).addTo(map);
+		}
+
+		L.control.scale({position: 'topright'}).addTo(map);
+		L.easyButton('fa-compass',
+			function (){
+				map.locate({setView: true});
+			},
+			'Interact with the map'
+		);
 
 		function onLocationFound(e) {
 			var radius = e.accuracy / 2;
@@ -52,40 +70,25 @@
 
 		map.on('locationfound', onLocationFound);
 		//map.on('locationerror', onLocationError);
-
 		map.locate({setView: true, maxZoom: 9});
 
-		var imageUrl;
-		var imageBounds;
-		imageUrl = 'http://opendata.cwb.gov.tw/opendata/DIV4/O-A0011-001.jpg';
-		imageBounds = [[19.66, 117.3], [27.16, 124.8]];
-		L.imageOverlay(imageUrl, imageBounds).addTo(map);
-		imageUrl = 'http://opendata.cwb.gov.tw/opendata/DIV4/O-A0011-002.jpg';
-		imageBounds = [[23.475, 119.99], [25.47, 122.01]];
-		L.imageOverlay(imageUrl, imageBounds).addTo(map);
-		imageUrl = 'http://opendata.cwb.gov.tw/opendata/DIV4/O-A0011-003.jpg';
-		imageBounds = [[21.86, 119.99], [23.88, 122.01]];
-		L.imageOverlay(imageUrl, imageBounds).addTo(map);
-		L.easyButton('fa-compass',
-			function (){
-				map.locate({setView: true});
-			},
-			'Interact with the map'
-		)
-		// L.marker([22, 120]).addTo(map);
-		// L.marker([24, 120]).addTo(map);
-		// L.marker([22, 122]).addTo(map);
-		// L.marker([24, 122]).addTo(map);
+		L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+			maxZoom: 11,
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			id: 'examples.map-i86knfo3'
+		}).addTo(map);
 	</script>
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-	
+
 	  ga('create', 'UA-42964626-3', 'auto');
 	  ga('send', 'pageview');
-	
+
 	</script>
 </body>
 </html>
